@@ -1,0 +1,8 @@
+@themes: "health", "courage";
+@theme: extract(@themes, 1);
+@import "../themes/@{theme}";
+@import "case";
+
+body {
+    background: @background;
+}
