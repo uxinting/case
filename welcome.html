@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Welcome</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<link rel="stylesheet/less" type="text/less" rev="stylesheet/less" href="less/welcome.less" />
+</head>
+<body>
+    
+    <div class="cover">
+        <h1>iCare</h1>
+        
+        <div class="nurse"></div>
+        
+        <div class="login-panel">
+            <div class="switch">
+                <p class="active">登陆</p>
+                <p>注册</p>
+            </div>
+            <form role="form">
+                <div class="form-group">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <input type="text" class="form-control" name="user" id="user" placeholder="手机号/邮箱">
+                </div>
+                <div class="form-group">
+                    <span class="glyphicon glyphicon-lock"></span>
+                    <input type="password" class="form-control" name="psw" id="psw" placeholder="密码">
+                </div>
+                <div class="form-group auth">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="auth" id="psw" placeholder=" 验证码">
+                        <button id="get-auth" type="button" class="btn btn-danger">获取</button>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default">登陆</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="loading"><div></div></div>
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="http://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/case.js"></script>
+    <script>
+        $(function(){
+            $('.switch').click(function(e){
+                if (!$(e.target).hasClass('active')) {
+                    $('.switch>p').toggleClass('active');
+                    $('.auth').fadeToggle();
+                    var sm = $('[type="submit"]');
+                    if ( sm.text() == '登陆' ) {
+                        sm.text('注册');
+                    } else {
+                        sm.text('登陆');
+                    }
+                }
+            });
+            
+            $('#get-auth').click(function(e){
+                var total = 60;
+                $(this)[0].disabled = true;
+                
+                var cd = setInterval(function(){
+                    total -= 1;
+                    $('#get-auth').text(total + '秒后重新获取');
+                }, 1000);
+                
+                setTimeout(function(){
+                    clearInterval(cd);
+                    $('#get-auth')[0].disabled = false;
+                    $('#get-auth').text('获取');
+                }, 60*1000);
+            })[0].disabled = false;
+        });
+    </script>
+</body>
+</html>

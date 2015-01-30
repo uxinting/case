@@ -1,8 +1,30 @@
-@themes: "health", "courage";
+@themes: "classic", "warm";
 @theme: extract(@themes, 1);
 @import "../themes/@{theme}";
+
 @import "case";
 
-body {
-    background: @background;
+.content {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    right: 0;
+    bottom: 0;
+    padding: 30px;
+    padding-left: 0;
+    overflow: hidden;
+    
+    .list-card {
+        height: 100%;
+        padding: 0;
+        
+        li {
+            display: block;
+            width: 100%;
+            height: 100%;
+            margin-bottom: 60px;
+            border: solid 1px @line;
+            box-shadow: 0 0 3px @shadow-dark;
+        }
+    }
 }
